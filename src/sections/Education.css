@@ -1,0 +1,103 @@
+/* ── Education ─────────────────────────────────── */
+.education__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+}
+
+.edu-card__degree {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+}
+
+.edu-card__school {
+    font-size: var(--fs-base);
+    color: var(--accent-start);
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+}
+
+.edu-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.edu-card__meta-divider {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.edu-card__courses {
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.edu-card__courses-label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Certifications & Achievements sub-sections */
+.education__sub {
+    margin-top: var(--space-2xl);
+}
+
+.education__sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+}
+
+.edu-sub__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.edu-sub__icon {
+    color: var(--accent-start);
+}
+
+.edu-sub__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.edu-sub__item {
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.edu-sub__item-date {
+    display: block;
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+    .education__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .education__sub-grid {
+        grid-template-columns: 1fr;
+    }
+}

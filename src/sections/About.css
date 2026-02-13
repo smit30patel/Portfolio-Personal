@@ -1,0 +1,114 @@
+/* ── About ─────────────────────────────────────── */
+.about__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-4xl);
+    align-items: start;
+}
+
+.about__image-container {
+    position: relative;
+    z-index: 1;
+}
+
+.about__image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--bg-card);
+    aspect-ratio: 3/4;
+}
+
+.about__image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.2));
+}
+
+.about__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+}
+
+.about__narrative {
+    font-size: var(--fs-lg);
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.about__narrative p+p {
+    margin-top: var(--space-lg);
+}
+
+.about__narrative strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.about__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.about__stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.about__stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-md);
+}
+
+.about__stat-number {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xl);
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.about__stat-label {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 968px) {
+    .about__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .about__image-wrapper {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .about__stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}

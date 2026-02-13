@@ -1,0 +1,245 @@
+/* ── Hero ──────────────────────────────────────── */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: var(--nav-height);
+    overflow: hidden;
+}
+
+.hero__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: center;
+}
+
+/* Text Column */
+.hero__text {
+    max-width: 600px;
+}
+
+.hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+}
+
+.hero__subtitle {
+    font-size: var(--fs-lg);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2xl);
+    max-width: 90%;
+}
+
+.hero__subtitle strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.hero__actions {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: var(--fs-sm);
+    text-decoration: none;
+}
+
+.btn--primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+}
+
+.btn--primary:hover {
+    background: var(--accent-start);
+    border-color: var(--accent-start);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+}
+
+.btn--secondary:hover {
+    border-color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+.hero__status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-subtle);
+}
+
+.pulsing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--success);
+    border-radius: 50%;
+    position: relative;
+    opacity: 0.4;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Visual Column (Code Card) */
+.hero__visual {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.code-card {
+    background: #1e1e2e;
+    /* Always dark for code editor feel */
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    transform: rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-card:hover {
+    transform: rotateY(0) rotateX(0) scale(1.02);
+}
+
+.code-card__header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-card__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.code-card__dot.red {
+    background: #ff5f56;
+}
+
+.code-card__dot.yellow {
+    background: #ffbd2e;
+}
+
+.code-card__dot.green {
+    background: #27c93f;
+}
+
+.code-card__title {
+    margin-left: 12px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.code-card__body {
+    padding: 24px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a9b7c6;
+    overflow-x: auto;
+}
+
+/* Syntax Highlighting simplified */
+.k {
+    color: #cc7832;
+    font-weight: bold;
+}
+
+/* Keyword/Key */
+.s {
+    color: #6a8759;
+}
+
+/* String */
+.v {
+    color: #a9b7c6;
+}
+
+/* Variable */
+.o {
+    color: #a9b7c6;
+}
+
+/* Operator */
+.p {
+    color: #cc7832;
+}
+
+/* Punctuation */
+
+@media (max-width: 968px) {
+    .hero__content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero__title {
+        font-size: 2.5rem;
+    }
+
+    .hero__visual {
+        width: 100%;
+        padding: 0 var(--space-md);
+    }
+
+    .code-card {
+        transform: none;
+    }
+
+    .hero__role {
+        font-size: var(--fs-xl);
+    }
+}

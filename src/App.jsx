@@ -1,31 +1,28 @@
+import './App.css';
 import Navbar from './components/Navbar';
-import FluidBackground from './components/FluidBackground';
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
+import Footer from './components/Footer';
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import Skills from './sections/Skills';
+import Education from './sections/Education';
+import Contact from './sections/Contact';
 
-function App() {
+export default function App() {
   return (
     <div className="app">
-      <FluidBackground />
       <Navbar />
       <main>
-        <section id="home">
-          <Home />
-        </section>
-        <section id="about">
-          <About />
-        </section>
-        <section id="projects">
-          <Projects />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Education />
+        <Contact />
       </main>
+      <Footer />
     </div>
   );
 }
-
-export default App;
