@@ -1,150 +1,122 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiGithub, FiLinkedin, FiSend } from 'react-icons/fi';
 import SectionHeading from '../components/SectionHeading';
+import { SectionBackgroundAccents } from '../components/BackgroundAccents';
 import './Contact.css';
 
-const links = [
+const EMAIL = 'smitpatel30071@gmail.com';
+const PHONE = '+1 480-803-4141';
+
+const SOCIALS = [
     {
-        label: 'Email',
-        value: 'smitpatel30071@gmail.com',
-        href: 'mailto:smitpatel30071@gmail.com',
-        icon: <FiMail />,
-    },
-    {
-        label: 'Phone',
-        value: '480-803-4141',
-        href: 'tel:+14808034141',
-        icon: <FiPhone />,
-    },
-    {
+        icon: '⌥',
         label: 'GitHub',
-        value: 'smit30patel',
+        sub: '@smit30patel',
         href: 'https://github.com/smit30patel',
-        icon: <FiGithub />,
+        newTab: true
     },
     {
+        icon: '◈',
         label: 'LinkedIn',
-        value: 'smit3062',
-        href: 'https://linkedin.com/in/smit3062',
-        icon: <FiLinkedin />,
+        sub: '/in/smit3062',
+        href: 'https://www.linkedin.com/in/smit3062',
+        newTab: true
+    },
+    {
+        icon: '✦',
+        label: 'Medium',
+        sub: 'Occasional hobby writing',
+        href: 'https://medium.com/@smitpatel30071',
+        newTab: true
+    },
+    {
+        icon: '◉',
+        label: 'Substack',
+        sub: 'Occasional hobby writing',
+        href: 'https://substack.com/@originalsmit',
+        newTab: true
     },
 ];
 
 export default function Contact() {
-    const form = useRef();
-    const [status, setStatus] = useState('');
+    const [copied, setCopied] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setStatus('sending');
-
-        const formData = new FormData(form.current);
-        const data = Object.fromEntries(formData.entries());
-
-        // Add FormSubmit configurations
-        data._subject = `New Feedback from ${data.user_name}`;
-        data._template = "table";
-
-        try {
-            const response = await fetch("https://formsubmit.co/ajax/smitpatel30071@gmail.com", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                setStatus('success');
-                e.target.reset();
-                setTimeout(() => setStatus(''), 5000);
-            } else {
-                setStatus('error');
-                setTimeout(() => setStatus(''), 5000);
-            }
-        } catch (error) {
-            console.error("Form error:", error);
-            setStatus('error');
-            setTimeout(() => setStatus(''), 5000);
-        }
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText(EMAIL).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2500);
+        });
     };
 
     return (
-        <section className="section" id="contact">
-            <div className="container">
-                <SectionHeading
-                    title="Get in Touch"
-                    subtitle="Open to opportunities, collaborations, and conversations."
-                />
+        <section className="section section--alt" id="contact" style={{ position: 'relative', overflow: 'hidden' }}>
+            <SectionBackgroundAccents variant="experience" />
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+                <SectionHeading title="Get In Touch" eyebrow="Contact & Social" />
 
-                <div className="contact__content">
-                    <div className="contact__grid">
-                        {links.map((link, i) => (
-                            <motion.a
-                                key={link.label}
-                                href={link.href}
-                                target={link.href.startsWith('http') ? '_blank' : undefined}
-                                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                className="contact-link"
-                                initial={{ opacity: 0, x: -30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.4 }}
-                            >
-                                <div className="contact-link__icon">{link.icon}</div>
-                                <div>
-                                    <div className="contact-link__label">{link.label}</div>
-                                    <div className="contact-link__value">{link.value}</div>
-                                </div>
-                            </motion.a>
-                        ))}
-                    </div>
+                <div className="contact__layout">
 
-                    <motion.form
-                        ref={form}
-                        onSubmit={handleSubmit}
-                        className="contact__form"
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                    {/* Direct contact */}
+                    <motion.div
+                        className="contact__direct"
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.2, duration: 0.5 }}
+                        transition={{ duration: 0.4 }}
                     >
-                        <h3 className="contact__form-title">Send Me a Message</h3>
-
-                        {/* Honeypot to prevent spam */}
-                        <input type="text" name="_honey" style={{ display: 'none' }} />
-
-                        {/* Disable Captcha for cleaner UI (optional) */}
-                        <input type="hidden" name="_captcha" value="false" />
-
-                        <div className="form-group">
-                            <label htmlFor="user_name">Name</label>
-                            <input type="text" name="user_name" id="user_name" required placeholder="Your Name" />
+                        {/* Email — copyable */}
+                        <div className="contact__info-block">
+                            <span className="contact__label">Email</span>
+                            <div className="contact__email-row">
+                                <span className="contact__email-text">{EMAIL}</span>
+                                <button
+                                    onClick={handleCopyEmail}
+                                    className="sketch-btn contact__copy-btn"
+                                    aria-label="Copy email"
+                                    id="copy-email-btn"
+                                >
+                                    {copied ? '✓ Copied!' : 'Copy'}
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" id="email" required placeholder="your.email@example.com" />
+                        {/* Phone */}
+                        <div className="contact__info-block">
+                            <span className="contact__label">Phone</span>
+                            <a href="tel:+14808034141" className="contact__phone-text">{PHONE}</a>
                         </div>
+                    </motion.div>
 
-                        <div className="form-group">
-                            <label htmlFor="message">Message</label>
-                            <textarea name="message" id="message" rows="5" required placeholder="Hello, I'd like to discuss..."></textarea>
+                    {/* Social links */}
+                    <motion.div
+                        className="contact__socials"
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                    >
+                        <span className="contact__label">Find me online</span>
+                        <div className="contact__social-grid">
+                            {SOCIALS.map((s) => (
+                                <a
+                                    key={s.label}
+                                    href={s.href}
+                                    target={s.newTab ? '_blank' : undefined}
+                                    rel={s.newTab ? 'noopener noreferrer' : undefined}
+                                    className="contact__social-card"
+                                    id={`social-${s.label.toLowerCase()}`}
+                                >
+                                    <span className="contact__social-icon">{s.icon}</span>
+                                    <div>
+                                        <span className="contact__social-label">{s.label}</span>
+                                        <span className="contact__social-sub">{s.sub}</span>
+                                    </div>
+                                    <span className="contact__social-arrow">→</span>
+                                </a>
+                            ))}
                         </div>
+                    </motion.div>
 
-                        <button type="submit" className={`submit-btn ${status}`} disabled={status === 'sending'}>
-                            {status === 'sending' ? 'Sending...' : (
-                                <>
-                                    Send Message <FiSend />
-                                </>
-                            )}
-                        </button>
-
-                        {status === 'success' && <p className="form-status success">Message sent successfully!</p>}
-                        {status === 'error' && <p className="form-status error">Failed to send. Please try again.</p>}
-                    </motion.form>
                 </div>
             </div>
         </section>

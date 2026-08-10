@@ -1,84 +1,63 @@
 /* ───────────────────────────────────────────────
-   Design System — Smit Patel Portfolio
+   Clean Editorial Design System
+   Smit Patel — Portfolio
+   Inspired by modern minimal portfolio design
    ─────────────────────────────────────────────── */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
 :root {
-  /* Palette — Light Theme */
-  --bg-primary: #f8f9fa;
-  /* Very light grey/white */
-  --bg-secondary: #ffffff;
-  /* Pure white for blocks */
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f3f5;
-  --border-subtle: #e9ecef;
-  /* Light grey border */
-  --border-accent: rgba(99, 102, 241, 0.4);
+  /* ── Color Palette ─────────────────────── */
+  --bg-primary:       #FFFFFF;       /* Pure white */
+  --bg-secondary:     #F5F5F3;       /* Very light warm gray for alternating sections */
+  --bg-card:          #FFFFFF;       /* Pure white card backgrounds */
+  --bg-nav:           rgba(255, 255, 255, 0.96);
 
-  --text-primary: #1f2937;
-  /* Dark grey/almost black */
-  --text-secondary: #4b5563;
-  /* Medium grey */
-  --text-muted: #9ca3af;
-  /* Light grey */
+  --text-primary:     #1A1A1A;       /* Near-black for headings */
+  --text-secondary:   #4A4A4A;       /* Dark gray for body */
+  --text-muted:       #8A8A8A;       /* Light gray for labels/meta */
+  --text-white:       #FFFFFF;
 
-  --accent-start: #4f46e5;
-  /* Indigo-600 */
-  --accent-end: #9333ea;
-  /* Purple-600 */
-  --accent-gradient: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-  --accent-glow: rgba(79, 70, 229, 0.15);
+  /* Sage Green Accent */
+  --accent:           #5D7A5D;       /* Sage green — primary accent */
+  --accent-dark:      #4A6248;       /* Darker sage for hover */
+  --accent-light:     #F0F5F0;       /* Very subtle sage tint on white */
+  --accent-mid:       rgba(93, 122, 93, 0.15);
 
-  --success: #10b981;
-  --tag-bg: rgba(79, 70, 229, 0.1);
-  --tag-text: #4f46e5;
+  /* Borders */
+  --border-light:     rgba(26, 26, 26, 0.08);
+  --border-medium:    rgba(26, 26, 26, 0.15);
+  --border-accent:    var(--accent);
 
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* Shadows */
+  --shadow-sm:        0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:        0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:        0 8px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.04);
 
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-lg: 1.125rem;
-  --fs-xl: 1.25rem;
-  --fs-2xl: 1.5rem;
-  --fs-3xl: 2rem;
-  --fs-4xl: 2.5rem;
-  --fs-5xl: 3.5rem;
-  --fs-hero: clamp(3rem, 8vw, 7rem);
+  /* ── Typography ───────────────────────── */
+  --font-sans:        'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:     'DM Serif Display', Georgia, serif;
 
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-  --space-4xl: 6rem;
-  --section-padding: clamp(4rem, 10vh, 8rem);
+  --fs-xs:            0.75rem;
+  --fs-sm:            0.875rem;
+  --fs-base:          1rem;
+  --fs-lg:            1.125rem;
+  --fs-xl:            1.25rem;
+  --fs-2xl:           1.5rem;
+  --fs-3xl:           2rem;
+  --fs-4xl:           2.5rem;
+  --fs-hero:          clamp(2.6rem, 5vw, 4rem);
 
-  /* Layout */
-  --max-width: 1200px;
-  --nav-height: 72px;
-
-  /* Misc */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  /* More rounded for block feel */
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-  --transition-fast: 0.2s ease;
-  --transition-base: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* Drop Shadows for Block Design */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* ── Layout ───────────────────────────── */
+  --max-width:        1100px;
+  --nav-height:       68px;
+  --section-padding:  clamp(4rem, 7vh, 6rem);
+  --border-radius:    8px;
+  --border-radius-lg: 14px;
+  --border-radius-pill: 100px;
 }
 
-/* ── Reset ────────────────────────────────────── */
+/* ── Reset ──────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -89,49 +68,45 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-height);
+  scroll-padding-top: calc(var(--nav-height) + 12px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-size: var(--fs-base);
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  line-height: 1.6;
+  /* Subtle paper grain texture — like the reference design */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
+/* ── Typography Defaults ─────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+p, span, label, input, select, textarea, button, a {
+  font-family: var(--font-sans);
+}
+
 a {
-  color: inherit;
   text-decoration: none;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-family: inherit;
   color: inherit;
 }
 
-/* ── Utilities ────────────────────────────────── */
+/* ── Container & Layout ────────────────── */
 .container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 1.75rem;
 }
 
 .section {
@@ -139,34 +114,172 @@ button {
   position: relative;
 }
 
-.gradient-text {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.section--alt {
+  background-color: var(--bg-secondary);
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
+/* ── Clean Section Divider ───────────────── */
+.sketch-divider {
+  width: 100%;
   height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  margin: 0;
+  background: var(--border-light);
 }
 
-/* ── Selection ────────────────────────────────── */
-::selection {
-  background: var(--accent-start);
-  color: #fff;
+/* ── Eyebrow Label ──────────────────────── */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
 }
 
-/* ── Scrollbar ────────────────────────────────── */
+/* ── Clean Card ──────────────────────────── */
+.clean-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.clean-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Tag Pill ────────────────────────────── */
+.sketch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background-color: var(--accent-light);
+  color: var(--accent-dark);
+  border: 1px solid rgba(93, 122, 93, 0.2);
+  border-radius: var(--border-radius-pill);
+  transition: background-color 0.15s ease;
+}
+
+/* ── Buttons ─────────────────────────────── */
+.sketch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.35rem;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.sketch-btn:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-medium);
+  transform: translateY(-1px);
+}
+
+.sketch-btn:active {
+  transform: translateY(0);
+}
+
+/* Primary (sage green) */
+.sketch-btn--primary {
+  background-color: var(--accent);
+  color: var(--text-white);
+  border-color: var(--accent);
+}
+
+.sketch-btn--primary:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: var(--text-white);
+}
+
+/* White/outline variant */
+.sketch-btn--white {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.sketch-btn--white:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* ── Form Inputs ─────────────────────────── */
+.sketch-select {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--border-radius);
+  padding: 0.45rem 2.2rem 0.45rem 0.85rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235D7A5D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  transition: all 0.2s ease;
+}
+
+.sketch-select:hover {
+  border-color: var(--accent);
+}
+
+.sketch-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-mid);
+}
+
+.sketch-input,
+.sketch-textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sketch-input:hover,
+.sketch-textarea:hover {
+  border-color: var(--border-medium);
+}
+
+.sketch-input:focus,
+.sketch-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-mid);
+}
+
+/* ── Custom Scrollbar ────────────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -174,6 +287,87 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-start);
-  border-radius: 3px;
+  background: rgba(93, 122, 93, 0.4);
+  border-radius: 4px;
 }
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ── Background Ambient Glow Orbs & Vector Styles ── */
+.section-bg-accents {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.bg-glow--sage-1 {
+  width: 450px;
+  height: 450px;
+  top: -100px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(93, 122, 93, 0.08) 0%, transparent 70%);
+}
+
+.bg-glow--sage-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(93, 122, 93, 0.07) 0%, transparent 70%);
+}
+
+.bg-glow--sage-3 {
+  width: 400px;
+  height: 400px;
+  top: 20%;
+  left: -100px;
+  background: radial-gradient(circle, rgba(93, 122, 93, 0.06) 0%, transparent 70%);
+}
+
+.bg-glow--warm-1 {
+  width: 550px;
+  height: 550px;
+  bottom: -100px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(230, 225, 215, 0.5) 0%, transparent 70%);
+}
+
+.bg-glow--warm-2 {
+  width: 450px;
+  height: 450px;
+  top: -50px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(235, 230, 220, 0.45) 0%, transparent 70%);
+}
+
+.section-vector-right {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.section-vector-left {
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ── Utility classes ─────────────────────── */
+.handdrawn { font-family: var(--font-sans); }
+.mono      { font-family: var(--font-sans); }
+.full-width { width: 100%; }

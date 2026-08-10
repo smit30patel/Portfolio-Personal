@@ -1,66 +1,45 @@
-import { FiCode, FiLayout, FiServer, FiCpu, FiCloud, FiDatabase } from 'react-icons/fi';
+import { AnimatePresence, motion } from 'framer-motion';
 import SectionHeading from '../components/SectionHeading';
-import AnimatedCard from '../components/AnimatedCard';
+import { SectionBackgroundAccents } from '../components/BackgroundAccents';
 import './Skills.css';
 
-const skillGroups = [
-    {
-        title: 'Languages',
-        icon: <FiCode />,
-        items: ['Python', 'SQL', 'JavaScript', 'TypeScript', 'Java', 'C++', 'R'],
-    },
-    {
-        title: 'Frontend',
-        icon: <FiLayout />,
-        items: ['React.js', 'Next.js', 'Angular.js', 'HTML', 'CSS', 'Tailwind', 'Redux'],
-    },
-    {
-        title: 'Backend',
-        icon: <FiServer />,
-        items: ['Node.js', 'Express.js', 'Spring Boot', 'REST APIs', 'JWT / OAuth', 'Maven', 'Gradle'],
-    },
-    {
-        title: 'Data & ML',
-        icon: <FiCpu />,
-        items: ['PyTorch', 'Tableau', 'Power BI', 'Matplotlib', 'Seaborn', 'Predictive Modeling', 'A/B Testing', 'Statistical Analysis'],
-    },
-    {
-        title: 'Cloud & DevOps',
-        icon: <FiCloud />,
-        items: ['AWS (EC2, S3, RDS)', 'Azure', 'Docker', 'CI/CD', 'Kafka', 'Airflow', 'Git', 'Agile/Scrum'],
-    },
-    {
-        title: 'Databases',
-        icon: <FiDatabase />,
-        items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Snowflake', 'Hadoop', 'Spark'],
-    },
-];
+export default function Skills({ data, activeRoleLabel }) {
+    const skillGroups = data.skills || [];
 
-export default function Skills() {
     return (
-        <section className="section" id="skills">
-            <div className="container">
-                <SectionHeading
-                    title="Skills"
-                    subtitle="Technologies I work with daily."
-                />
+        <section className="section" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
+            <SectionBackgroundAccents variant="skills" />
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+                <SectionHeading title="Skills" eyebrow="Technical Expertise" />
 
-                <div className="skills__grid">
-                    {skillGroups.map((group, i) => (
-                        <AnimatedCard key={group.title} delay={i * 0.08}>
-                            <div className="skill-group__title">
-                                <span className="skill-group__icon">{group.icon}</span>
-                                {group.title}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeRoleLabel}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.25 }}
+                        className="skills__grid"
+                    >
+                        {skillGroups.map((group) => (
+                            <div key={group.category} className="skills__category-block">
+                                <h3 className="skills__category-title">{group.category}</h3>
+
+                                <ol className="skills__items-container">
+                                    {group.skills.map((skill, idx) => (
+                                        <li key={skill.name} className="skills__item">
+                                            <span className="skills__item-number">{idx + 1}.</span>
+                                            <span className="skills__item-name">{skill.name}</span>
+                                        </li>
+                                    ))}
+                                </ol>
                             </div>
-                            <div className="skill-group__items">
-                                {group.items.map(item => (
-                                    <span key={item} className="skill-badge">{item}</span>
-                                ))}
-                            </div>
-                        </AnimatedCard>
-                    ))}
-                </div>
+                        ))}
+                    </motion.div>
+                </AnimatePresence>
             </div>
+
+            <div className="sketch-divider" />
         </section>
     );
 }

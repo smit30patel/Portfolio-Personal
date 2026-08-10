@@ -1,21 +1,15 @@
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import React from 'react';
 import './Footer.css';
 
 export default function Footer() {
     return (
         <footer className="footer">
-            <div className="container footer__inner">
-                <p className="footer__copy">© {new Date().getFullYear()} Smit Patel. Built with React & intention.</p>
-                <div className="footer__socials">
-                    <a href="https://github.com/smit30patel" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="GitHub">
-                        <FiGithub />
-                    </a>
-                    <a href="https://linkedin.com/in/smit3062" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="LinkedIn">
-                        <FiLinkedin />
-                    </a>
-                    <a href="mailto:spate348@asu.edu" className="footer__social-link" aria-label="Email">
-                        <FiMail />
-                    </a>
+            <div className="container footer__container">
+                <div className="handdrawn" style={{ fontSize: '1.1rem', color: '#2b2b2b' }}>
+                    ✏️ Designed & Built by Smit Patel
+                </div>
+                <div className="mono" style={{ fontSize: '0.85rem', color: '#52524e' }}>
+                    Single-Page Technical Sketchbook Portfolio · Dynamic Role Filter Engine · {new Date().getFullYear()}
                 </div>
             </div>
         </footer>
