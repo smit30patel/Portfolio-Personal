@@ -5,6 +5,31 @@ import './Experience.css';
 // Single canonical experience — same across all roles, only descriptions differ per role
 const EXPERIENCE = [
     {
+        period: "Aug 2026 – Present",
+        role: "Data Scientist Intern",
+        company: "XPet Technologies",
+        location: "San Francisco Bay Area (Remote)",
+        descriptions: {
+            data_scientist: [
+                "Collect, clean, and validate longitudinal pet-health data (biomarkers, activity, behavioral signals) to support model-ready datasets.",
+                "Build and evaluate ML/statistical models (classification, clustering, anomaly detection, time-series) for health-pattern detection in companion animals.",
+                "Perform feature engineering and exploratory data analysis on structured/unstructured health datasets to surface trends and correlations.",
+                "Apply model validation, bias assessment, and explainability practices aligned with responsible-AI standards.",
+                "Document methodologies, assumptions, and findings to support reproducible research.",
+                "Collaborate in a startup environment translating research concepts into testable analytical approaches."
+            ],
+            full_stack: [
+                "Collect, clean, and validate longitudinal pet-health data (biomarkers, activity, behavioral signals) to support model-ready datasets.",
+                "Build and evaluate ML/statistical models (classification, clustering, anomaly detection, time-series) for health-pattern detection in companion animals.",
+                "Perform feature engineering and exploratory data analysis on structured/unstructured health datasets to surface trends and correlations.",
+                "Apply model validation, bias assessment, and explainability practices aligned with responsible-AI standards.",
+                "Document methodologies, assumptions, and findings to support reproducible research.",
+                "Collaborate in a startup environment translating research concepts into testable analytical approaches."
+            ],
+        },
+        tags: ["Python", "Machine Learning", "Time-Series", "EDA", "Responsible AI", "Feature Engineering"]
+    },
+    {
         period: "Apr 2026 – Present",
         role: "Software Developer Intern",
         company: "99 Yards",

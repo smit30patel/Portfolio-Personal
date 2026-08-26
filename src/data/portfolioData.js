@@ -14,7 +14,7 @@ export const portfolioData = {
       greeting: "Hi, I'm Smit Patel",
       roleTitle: "Data Scientist",
       tagline: "passionate about solving complex problems through AI, statistical modeling, and data-driven actionable insights.",
-      bioParagraph: "Data Scientist with Master of Science in Data Science from Arizona State University (GPA 3.58/4.00). Over 4 years of experience using Data Science and AI to solve creative problems through structured thinking, attention to detail, and an implementation mindset. Experienced in machine learning, deep learning, LLMs, RAG, recommendation systems, and real-time Kafka data pipelines.",
+      bioParagraph: "Data Scientist Intern at XPet Technologies with a Master of Science in Data Science from Arizona State University (GPA 3.58/4.00). Over 4 years of experience using Data Science and AI to solve creative problems through structured thinking, attention to detail, and an implementation mindset. Experienced in machine learning, deep learning, LLMs, RAG, recommendation systems, and real-time Kafka data pipelines.",
       resumePdf: "/resumes/Data_Scientist_resume-v1.pdf",
     },
     skills: [
