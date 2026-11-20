@@ -1,19 +1,27 @@
-# React + Vite
+# Smit Patel — Portfolio
 
-Live link to Site: http://bit.ly/3ZyETJx
-Link 2 : https://portfolio-seven-jade-lr5ctxena1.vercel.app
+Personal portfolio. Single page: hero, about, experience, projects, skills, education, contact.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live: https://portfolio-seven-jade-lr5ctxena1.vercel.app
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React 19 + Vite, plain CSS, `react-icons`. No UI framework or animation library.
 
-## React Compiler
+## Develop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```sh
+npm install
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
+```
 
-## Expanding the ESLint configuration
+## Editing content
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+All copy lives in `src/data/portfolio.js`.
+
+- **Projects** follow problem → built → stack → key decision → links → deployment.
+  `decision` and `deployment` are optional; a missing field is not rendered.
+- **Tags** double as the skills list — only tag a technology the item actually used.
+- Resume PDF: `public/resumes/`. Profile photo: `public/profile.jpg`.

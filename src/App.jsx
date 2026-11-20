@@ -1,62 +1,32 @@
-import { useState } from 'react';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Hero from './sections/Hero';
+import About from './sections/About';
 import Experience from './sections/Experience';
-import Skills from './sections/Skills';
 import Projects from './sections/Projects';
-import Publications from './sections/Publications';
+import Skills from './sections/Skills';
+import Education from './sections/Education';
 import Contact from './sections/Contact';
-
-import { roles, portfolioData } from './data/portfolioData';
+import useReveal from './hooks/useReveal';
 import './App.css';
 
 export default function App() {
-  const [selectedRole, setSelectedRole] = useState('data_scientist');
-
-  const currentRoleObj = roles.find((r) => r.id === selectedRole) || roles[0];
-  const activeRoleLabel = currentRoleObj.label;
-  const currentRoleData = portfolioData[selectedRole] || portfolioData.data_scientist;
-
-  const handleRoleChange = (newRole) => {
-    setSelectedRole(newRole);
-  };
+  useReveal();
 
   return (
     <div className="app">
-      <Navbar
-        selectedRole={selectedRole}
-        onRoleChange={handleRoleChange}
-        roles={roles}
-      />
-
-      <main>
-        <Hero
-          selectedRole={selectedRole}
-          onRoleChange={handleRoleChange}
-          roles={roles}
-          data={currentRoleData}
-        />
-
-        <Experience
-          data={currentRoleData}
-          activeRoleLabel={activeRoleLabel}
-        />
-
-        <Skills
-          data={currentRoleData}
-          activeRoleLabel={activeRoleLabel}
-        />
-
-        <Projects
-          data={currentRoleData}
-          activeRoleLabel={activeRoleLabel}
-        />
-
-        <Publications />
-
+      <a href="#main" className="skip-link">Skip to content</a>
+      <Navbar />
+      <main id="main">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Education />
         <Contact />
       </main>
-      {/* Footer removed */}
+      <Footer />
     </div>
   );
 }

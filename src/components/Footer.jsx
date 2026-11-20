@@ -1,16 +1,17 @@
-import React from 'react';
+import { FiArrowUp } from 'react-icons/fi';
+import { profile } from '../data/portfolio';
 import './Footer.css';
 
 export default function Footer() {
     return (
         <footer className="footer">
-            <div className="container footer__container">
-                <div className="handdrawn" style={{ fontSize: '1.1rem', color: '#2b2b2b' }}>
-                    ✏️ Designed & Built by Smit Patel
-                </div>
-                <div className="mono" style={{ fontSize: '0.85rem', color: '#52524e' }}>
-                    Single-Page Technical Sketchbook Portfolio · Dynamic Role Filter Engine · {new Date().getFullYear()}
-                </div>
+            <div className="container footer__inner">
+                <p>© {new Date().getFullYear()} {profile.name}</p>
+                <p className="footer__thanks script">thanks for stopping by!</p>
+                <p className="footer__built mono">Built with React + Vite</p>
+                <a href="#top" className="footer__top">
+                    Back to top <FiArrowUp aria-hidden="true" />
+                </a>
             </div>
         </footer>
     );

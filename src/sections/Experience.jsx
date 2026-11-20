@@ -1,156 +1,69 @@
-import SectionHeading from '../components/SectionHeading';
-import { SectionBackgroundAccents } from '../components/BackgroundAccents';
+import { FiExternalLink, FiGithub } from 'react-icons/fi';
+import { experience } from '../data/portfolio';
+import SectionHeader from '../components/SectionHeader';
+import { toneStyle } from '../utils/tones';
 import './Experience.css';
 
-// Single canonical experience — same across all roles, only descriptions differ per role
-const EXPERIENCE = [
-    {
-        period: "Aug 2026 – Present",
-        role: "Data Scientist Intern",
-        company: "XPet Technologies",
-        location: "San Francisco Bay Area (Remote)",
-        descriptions: {
-            data_scientist: [
-                "Collect, clean, and validate longitudinal pet-health data (biomarkers, activity, behavioral signals) to support model-ready datasets.",
-                "Build and evaluate ML/statistical models (classification, clustering, anomaly detection, time-series) for health-pattern detection in companion animals.",
-                "Perform feature engineering and exploratory data analysis on structured/unstructured health datasets to surface trends and correlations.",
-                "Apply model validation, bias assessment, and explainability practices aligned with responsible-AI standards.",
-                "Document methodologies, assumptions, and findings to support reproducible research.",
-                "Collaborate in a startup environment translating research concepts into testable analytical approaches."
-            ],
-            full_stack: [
-                "Collect, clean, and validate longitudinal pet-health data (biomarkers, activity, behavioral signals) to support model-ready datasets.",
-                "Build and evaluate ML/statistical models (classification, clustering, anomaly detection, time-series) for health-pattern detection in companion animals.",
-                "Perform feature engineering and exploratory data analysis on structured/unstructured health datasets to surface trends and correlations.",
-                "Apply model validation, bias assessment, and explainability practices aligned with responsible-AI standards.",
-                "Document methodologies, assumptions, and findings to support reproducible research.",
-                "Collaborate in a startup environment translating research concepts into testable analytical approaches."
-            ],
-        },
-        tags: ["Python", "Machine Learning", "Time-Series", "EDA", "Responsible AI", "Feature Engineering"]
-    },
-    {
-        period: "Apr 2026 – Present",
-        role: "Software Developer Intern",
-        company: "99 Yards",
-        location: "New York City, NY (Remote)",
-        descriptions: {
-            data_scientist: [
-                "Created backend services and REST APIs using Java, Spring Boot, and TypeScript supporting AI-powered discovery experiences for 100+ brands and suppliers.",
-                "Improved API performance by 30% through backend optimization, making high-traffic services faster and more reliable.",
-                "Contributed to recommendation system pipelines, analytics workflows, and data discovery features used across the product."
-            ],
-            full_stack: [
-                "Built backend microservices and REST APIs in Java, Spring Boot, and TypeScript supporting AI-powered application experiences for 100+ brands.",
-                "Improved API response time by 30% through performance tuning, load optimization, and query refactoring.",
-                "Partnered with product managers and designers to ship full-stack features across discovery and search experiences."
-            ],
-        },
-        tags: ["Java", "Spring Boot", "TypeScript", "REST APIs", "Analytics"]
-    },
-    {
-        period: "Oct 2025 – May 2026",
-        role: "Founding Engineer",
-        company: "Opportunity Hacks × NMTSA",
-        location: "Phoenix, AZ — 1st Place Winner",
-        descriptions: {
-            data_scientist: [
-                "Took 1st Place by architecting a custom CMS built from the ground up, solving a multi-year technical roadblock for the organization.",
-                "Translated complex stakeholder requirements into a scalable platform architecture enabling non-technical staff to manage patient-facing content independently.",
-                "Led end-to-end product delivery from system design to cloud production deployment over an 8-month engagement."
-            ],
-            full_stack: [
-                "Won 1st Place by designing and shipping a full-stack custom CMS that replaced a legacy system causing years of bottlenecks.",
-                "Architected scalable backend with cloud storage (AWS S3), admin dashboard, and form management for daily non-profit operations.",
-                "Led system design, cloud deployment, and cross-functional delivery from initial hackathon prototype to final production release."
-            ],
-        },
-        tags: ["Next.js", "TypeScript", "AWS S3", "System Architecture", "CMS"]
-    },
-    {
-        period: "Jan 2023 – May 2023",
-        role: "Full Stack Intern",
-        company: "Arth Info Soft Pvt. Ltd",
-        location: "Ahmedabad, India",
-        descriptions: {
-            data_scientist: [
-                "Built full-stack applications using Python, Node.js, and PostgreSQL supporting platforms with over 10,000 monthly users.",
-                "Developed reproducible data workflows processing transaction logs, improving backend query throughput and data pipeline reliability.",
-                "Deployed containerized services with Docker, supporting scalable cloud infrastructure for production data systems."
-            ],
-            full_stack: [
-                "Built and deployed full-stack applications using Python, Node.js, and PostgreSQL serving 10,000+ monthly users.",
-                "Optimized backend services and database queries, significantly improving application response time and stability.",
-                "Containerized applications with Docker and integrated cloud deployment pipelines for reliable production delivery."
-            ],
-        },
-        tags: ["Python", "Node.js", "PostgreSQL", "Docker", "Data Pipelines"]
-    }
-];
-
-export default function Experience({ activeRoleLabel }) {
-    const roleKeyMap = {
-        'DATA SCIENTIST': 'data_scientist',
-        'SOFTWARE ENGINEER': 'full_stack',
-    };
-    const roleKey = roleKeyMap[activeRoleLabel] || 'data_scientist';
-
+export default function Experience() {
     return (
-        <section className="section section--alt" id="experience" style={{ position: 'relative', overflow: 'hidden' }}>
-            <SectionBackgroundAccents variant="experience" />
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <SectionHeading title="Experience" eyebrow="Work History" />
+        <section className="section" id="experience">
+            <div className="container reveal">
+                <SectionHeader
+                    index="02"
+                    title={<>Where I’ve <span className="em">shipped</span></>}
+                    lead="APIs, data models, and AI pipelines in production — at startups and for a nonprofit."
+                />
 
-                <div className="experience__timeline">
-                    <div className="experience__timeline-line" />
+                <ol className="timeline">
+                    {experience.map((exp, i) => (
+                        <li key={exp.company} className="timeline__item" style={toneStyle(i)}>
+                            <span className={`timeline__marker${i === 0 ? ' is-current' : ''}`} aria-hidden="true" />
 
-                    <div className="experience__items-wrapper">
-                        {EXPERIENCE.map((exp, index) => {
-                            const bullets = exp.descriptions[roleKey] || exp.descriptions.data_scientist;
-                            return (
-                                <div
-                                    key={exp.role + index}
-                                    className="experience__item"
-                                >
-                                    {/* Timeline Node */}
-                                    <div className="experience__node-ring">
-                                        <span className="experience__node-dot" />
+                            <article className="xp">
+                                <header className="xp__head">
+                                    <div>
+                                        <h3 className="xp__role">{exp.role}</h3>
+                                        <p className="xp__company">{exp.company}</p>
                                     </div>
+                                    <p className="xp__meta">
+                                        <span className="mono">{exp.period}</span>
+                                        <span>{exp.location}</span>
+                                    </p>
+                                </header>
 
-                                    {/* Entry */}
-                                    <div className="experience__entry">
-                                        <div className="experience__entry-header">
-                                            <div>
-                                                <span className="experience__period">{exp.period}</span>
-                                                <h3 className="experience__title">{exp.role}</h3>
-                                                <p className="experience__company">
-                                                    {exp.company} <span className="experience__location">— {exp.location}</span>
-                                                </p>
-                                            </div>
+                                <ul className="xp__points">
+                                    {exp.points.map((point) => (
+                                        <li key={point}>{point}</li>
+                                    ))}
+                                </ul>
+
+                                <footer className="xp__foot">
+                                    <ul className="chips" aria-label="Technologies">
+                                        {exp.tags.map((tag) => (
+                                            <li key={tag} className="chip">{tag}</li>
+                                        ))}
+                                    </ul>
+
+                                    {(exp.live || exp.github) && (
+                                        <div className="xp__links">
+                                            {exp.live && (
+                                                <a href={exp.live} target="_blank" rel="noopener noreferrer" className="btn btn--sm">
+                                                    <FiExternalLink aria-hidden="true" /> Live site
+                                                </a>
+                                            )}
+                                            {exp.github && (
+                                                <a href={exp.github} target="_blank" rel="noopener noreferrer" className="btn btn--sm">
+                                                    <FiGithub aria-hidden="true" /> Code
+                                                </a>
+                                            )}
                                         </div>
-
-                                        {/* Bullet list */}
-                                        <ul className="experience__bullet-list">
-                                            {bullets.map((bullet, i) => (
-                                                <li key={i}>{bullet}</li>
-                                            ))}
-                                        </ul>
-
-                                        {/* Tags */}
-                                        <div className="experience__tags">
-                                            {exp.tags.map((tag) => (
-                                                <span key={tag} className="sketch-pill">{tag}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+                                    )}
+                                </footer>
+                            </article>
+                        </li>
+                    ))}
+                </ol>
             </div>
-
-            <div className="sketch-divider" />
         </section>
     );
 }

@@ -1,45 +1,27 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import SectionHeading from '../components/SectionHeading';
-import { SectionBackgroundAccents } from '../components/BackgroundAccents';
+import { skills } from '../data/portfolio';
+import SectionHeader from '../components/SectionHeader';
+import { toneStyle } from '../utils/tones';
 import './Skills.css';
 
-export default function Skills({ data, activeRoleLabel }) {
-    const skillGroups = data.skills || [];
-
+export default function Skills() {
     return (
-        <section className="section" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
-            <SectionBackgroundAccents variant="skills" />
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <SectionHeading title="Skills" eyebrow="Technical Expertise" />
+        <section className="section" id="skills">
+            <div className="container reveal">
+                <SectionHeader index="04" title={<>Tools of the <span className="em">trade</span></>} lead="The tools behind the work above." />
 
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={activeRoleLabel}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.25 }}
-                        className="skills__grid"
-                    >
-                        {skillGroups.map((group) => (
-                            <div key={group.category} className="skills__category-block">
-                                <h3 className="skills__category-title">{group.category}</h3>
-
-                                <ol className="skills__items-container">
-                                    {group.skills.map((skill, idx) => (
-                                        <li key={skill.name} className="skills__item">
-                                            <span className="skills__item-number">{idx + 1}.</span>
-                                            <span className="skills__item-name">{skill.name}</span>
-                                        </li>
-                                    ))}
-                                </ol>
-                            </div>
-                        ))}
-                    </motion.div>
-                </AnimatePresence>
+                <div className="skills">
+                    {skills.map(({ group, items }, i) => (
+                        <div key={group} className="skills__group" style={toneStyle(i)}>
+                            <h3 className="skills__title mono">{group}</h3>
+                            <ul className="skills__items">
+                                {items.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             </div>
-
-            <div className="sketch-divider" />
         </section>
     );
 }

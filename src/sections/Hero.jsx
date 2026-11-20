@@ -1,130 +1,138 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { HeroBackgroundShapes } from '../components/BackgroundAccents';
+import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { profile, highlights, terminalSummary } from '../data/portfolio';
+import { toneStyle } from '../utils/tones';
 import './Hero.css';
 
-export default function Hero({ selectedRole, onRoleChange, roles, data }) {
-    const heroData = data.hero;
+function JsonValue({ value }) {
+    if (Array.isArray(value)) {
+        return (
+            <>
+                <span className="t-punc">[</span>
+                {value.map((item, i) => (
+                    <span key={item}>
+                        <span className="t-str">"{item}"</span>
+                        {i < value.length - 1 && <span className="t-punc">, </span>}
+                    </span>
+                ))}
+                <span className="t-punc">]</span>
+            </>
+        );
+    }
+    return <span className="t-str">"{value}"</span>;
+}
 
-    // Fixed highlights shown regardless of role
-    const highlights = [
-        { value: "M.S.", label: "Data Science @ ASU" },
-        { value: "3.5+", label: "GPA at ASU" },
-        { value: "1", label: "Published Review" },
-        { value: "2×", label: "Hackathon Winner" },
-        { value: "3+", label: "Yrs Data Science & AI" },
-    ];
-
+function TerminalCard() {
     return (
-        <section className="hero section" id="about-hero" style={{ position: 'relative', overflow: 'hidden' }}>
-            <HeroBackgroundShapes />
-            <div className="container hero__container">
-                <div className="hero__grid">
-
-                    {/* Left Column: Profile Photo */}
-                    <motion.div
-                        className="hero__avatar-col"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.55 }}
-                    >
-                        <div className="hero__photo-frame">
-                            <img
-                                src="/img/profile_pic_croped.png"
-                                alt="Smit Patel"
-                                className="hero__photo"
-                            />
-                        </div>
-                    </motion.div>
-
-                    {/* Right Column: Bio & Role Filter */}
-                    <motion.div
-                        className="hero__content-col"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.55, delay: 0.1 }}
-                    >
-                        {/* Eyebrow */}
-                        <span className="eyebrow">👋 Hello, I'm</span>
-
-                        {/* Name */}
-                        <h1 className="hero__name">Smit Patel</h1>
-
-                        {/* Dynamic Role Title */}
-                        <AnimatePresence mode="wait">
-                            <motion.p
-                                key={selectedRole + '-role'}
-                                initial={{ opacity: 0, y: 6 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -6 }}
-                                transition={{ duration: 0.2 }}
-                                className="hero__role-title"
-                            >
-                                {heroData.roleTitle}
-                                <span className="hero__role-sep"> — </span>
-                                <span className="hero__tagline-inline">{heroData.tagline}</span>
-                            </motion.p>
-                        </AnimatePresence>
-
-                        {/* Role Dropdown */}
-                        <div className="hero__filter-card">
-                            <label className="hero__filter-label" htmlFor="role-dropdown">
-                                🔍 Viewing portfolio for:
-                            </label>
-                            <div className="hero__select-wrapper">
-                                <select
-                                    id="role-dropdown"
-                                    value={selectedRole}
-                                    onChange={(e) => onRoleChange(e.target.value)}
-                                    className="sketch-select full-width"
-                                >
-                                    {roles.map((r) => (
-                                        <option key={r.id} value={r.id}>
-                                            {r.title}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-
-                        {/* Dynamic Bio */}
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={selectedRole}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ duration: 0.25 }}
-                                className="hero__dynamic-bio"
-                            >
-                                <p>{heroData.bioParagraph}</p>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* Fixed Highlights */}
-                        <div className="hero__highlights-grid">
-                            {highlights.map((item, idx) => (
-                                <div key={idx} className="hero__highlight-item">
-                                    <span className="hero__highlight-value">{item.value}</span>
-                                    <span className="hero__highlight-label">{item.label}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Actions */}
-                        <div className="hero__actions">
-                            <a href="#projects" className="sketch-btn sketch-btn--primary">
-                                View Projects →
-                            </a>
-                            <a href="#contact" className="sketch-btn sketch-btn--white">
-                                Get In Touch
-                            </a>
-                        </div>
-                    </motion.div>
-
+        <div className="terminal-wrap">
+            <p className="terminal__note script" aria-hidden="true">the quick version ↘</p>
+            <figure className="terminal" aria-label="Profile summary">
+                <div className="terminal__bar" aria-hidden="true">
+                    <span /><span /><span />
+                    <span className="terminal__title">~/smit/profile.json</span>
                 </div>
-            </div>
+                <pre className="terminal__body">
+                    <code>
+                        <span className="t-prompt">$ </span>cat profile.json{'\n'}
+                        <span className="t-punc">{'{'}</span>{'\n'}
+                        {terminalSummary.map(([key, value], i) => (
+                            <span key={key} className="terminal__line">
+                                <span className="t-key">"{key}"</span>
+                                <span className="t-punc">: </span>
+                                <JsonValue value={value} />
+                                {i < terminalSummary.length - 1 && <span className="t-punc">,</span>}
+                            </span>
+                        ))}
+                        <span className="t-punc">{'}'}</span>{'\n'}
+                        <span className="t-prompt">$ </span><span className="terminal__cursor" aria-hidden="true" />
+                    </code>
+                </pre>
+            </figure>
+        </div>
+    );
+}
 
-            <div className="sketch-divider" />
+export default function Hero() {
+    return (
+        <section className="hero" id="top">
+            <div className="hero__backdrop" aria-hidden="true" />
+            <div className="hero__glow" aria-hidden="true" />
+
+            <div className="container">
+                <div className="hero__inner">
+                    <div className="hero__copy">
+                        <a href="#contact" className="status-pill">
+                            <span className="status-pill__dot" aria-hidden="true" />
+                            {profile.openTo}
+                        </a>
+
+                        <p className="hero__hello script">hi there, I’m</p>
+                        <h1 className="hero__name">{profile.name}</h1>
+                        <p className="hero__title">
+                            <span className="hero__title-main">Software Engineer</span>
+                            <span className="hero__title-sub">
+                                <span className="hero__title-backend">Backend</span>
+                                <span className="hero__amp">&amp;</span>
+                                <span className="em hero__title-ai">AI</span>
+                                {' '}Engineer
+                            </span>
+                        </p>
+                        <p className="hero__intro">
+                            {profile.intro.map((part) =>
+                                typeof part === 'string' ? (
+                                    part
+                                ) : (
+                                    <span key={part[0]} className={`hero__mark hero__mark--${part[1]}`}>
+                                        {part[0]}
+                                    </span>
+                                )
+                            )}
+                        </p>
+
+                        <div className="hero__actions">
+                            <a
+                                href={profile.resume}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn--primary"
+                            >
+                                <FiDownload aria-hidden="true" /> Resume
+                            </a>
+                            <a href="#projects" className="btn">
+                                View projects <FiArrowRight aria-hidden="true" />
+                            </a>
+                            <a
+                                href={profile.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="icon-btn"
+                                aria-label="GitHub"
+                            >
+                                <FiGithub aria-hidden="true" />
+                            </a>
+                            <a
+                                href={profile.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="icon-btn"
+                                aria-label="LinkedIn"
+                            >
+                                <FiLinkedin aria-hidden="true" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <TerminalCard />
+                </div>
+
+                <dl className="stats">
+                    {highlights.map((item, i) => (
+                        <div key={item.label} className="stats__item" style={toneStyle(i)}>
+                            <dt>{item.label}</dt>
+                            <dd>{item.value}</dd>
+                        </div>
+                    ))}
+                </dl>
+            </div>
         </section>
     );
 }

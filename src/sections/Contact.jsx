@@ -1,122 +1,81 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import SectionHeading from '../components/SectionHeading';
-import { SectionBackgroundAccents } from '../components/BackgroundAccents';
+import {
+    FiArrowUpRight, FiCheck, FiCopy, FiEdit3, FiFileText, FiGithub, FiLinkedin, FiMapPin, FiPhone,
+} from 'react-icons/fi';
+import { profile, writing } from '../data/portfolio';
+import SectionHeader from '../components/SectionHeader';
 import './Contact.css';
 
-const EMAIL = 'smitpatel30071@gmail.com';
-const PHONE = '+1 480-803-4141';
-
-const SOCIALS = [
-    {
-        icon: '⌥',
-        label: 'GitHub',
-        sub: '@smit30patel',
-        href: 'https://github.com/smit30patel',
-        newTab: true
-    },
-    {
-        icon: '◈',
-        label: 'LinkedIn',
-        sub: '/in/smit3062',
-        href: 'https://www.linkedin.com/in/smit3062',
-        newTab: true
-    },
-    {
-        icon: '✦',
-        label: 'Medium',
-        sub: 'Occasional hobby writing',
-        href: 'https://medium.com/@smitpatel30071',
-        newTab: true
-    },
-    {
-        icon: '◉',
-        label: 'Substack',
-        sub: 'Occasional hobby writing',
-        href: 'https://substack.com/@originalsmit',
-        newTab: true
-    },
+const LINKS = [
+    { label: 'GitHub', handle: '@smit30patel', href: profile.github, icon: FiGithub },
+    { label: 'LinkedIn', handle: '/in/smit3062', href: profile.linkedin, icon: FiLinkedin },
+    { label: 'Resume', handle: 'PDF · 1 page', href: profile.resume, icon: FiFileText },
+    ...writing.map((w) => ({ ...w, icon: FiEdit3 })),
 ];
 
 export default function Contact() {
-    const [copied, setCopied] = useState(false);
+    const [copyState, setCopyState] = useState('idle');
 
     const handleCopyEmail = () => {
-        navigator.clipboard.writeText(EMAIL).then(() => {
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2500);
-        });
+        navigator.clipboard
+            .writeText(profile.email)
+            .then(() => setCopyState('copied'))
+            .catch(() => setCopyState('failed'))
+            .finally(() => setTimeout(() => setCopyState('idle'), 2500));
     };
 
+    const copyLabel = { idle: 'Copy email', copied: 'Copied', failed: 'Copy failed' }[copyState];
+
     return (
-        <section className="section section--alt" id="contact" style={{ position: 'relative', overflow: 'hidden' }}>
-            <SectionBackgroundAccents variant="experience" />
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <SectionHeading title="Get In Touch" eyebrow="Contact & Social" />
+        <section className="section" id="contact">
+            <div className="container reveal">
+                <SectionHeader index="06" note="say hi!" title={<>Let’s <span className="em">talk</span></>} />
 
-                <div className="contact__layout">
+                <div className="contact">
+                    <div className="contact__cta">
+                        <p className="contact__lead">
+                            I’m looking for full-time or internship software engineering roles focused on backend and AI.
+                            Email is the fastest way to reach me.
+                        </p>
 
-                    {/* Direct contact */}
-                    <motion.div
-                        className="contact__direct"
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        {/* Email — copyable */}
-                        <div className="contact__info-block">
-                            <span className="contact__label">Email</span>
-                            <div className="contact__email-row">
-                                <span className="contact__email-text">{EMAIL}</span>
-                                <button
-                                    onClick={handleCopyEmail}
-                                    className="sketch-btn contact__copy-btn"
-                                    aria-label="Copy email"
-                                    id="copy-email-btn"
-                                >
-                                    {copied ? '✓ Copied!' : 'Copy'}
-                                </button>
-                            </div>
+                        <a href={`mailto:${profile.email}`} className="contact__email">
+                            {profile.email}
+                            <FiArrowUpRight aria-hidden="true" />
+                        </a>
+
+                        <div className="contact__actions">
+                            <button type="button" onClick={handleCopyEmail} className="btn btn--sm">
+                                {copyState === 'copied'
+                                    ? <FiCheck aria-hidden="true" />
+                                    : <FiCopy aria-hidden="true" />}
+                                {copyLabel}
+                            </button>
+                            <span className="visually-hidden" aria-live="polite">
+                                {copyState === 'copied' ? 'Email copied to clipboard' : ''}
+                            </span>
+                            <a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`} className="contact__meta">
+                                <FiPhone aria-hidden="true" /> {profile.phone}
+                            </a>
+                            <span className="contact__meta">
+                                <FiMapPin aria-hidden="true" /> {profile.location}
+                            </span>
                         </div>
+                    </div>
 
-                        {/* Phone */}
-                        <div className="contact__info-block">
-                            <span className="contact__label">Phone</span>
-                            <a href="tel:+14808034141" className="contact__phone-text">{PHONE}</a>
-                        </div>
-                    </motion.div>
-
-                    {/* Social links */}
-                    <motion.div
-                        className="contact__socials"
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                    >
-                        <span className="contact__label">Find me online</span>
-                        <div className="contact__social-grid">
-                            {SOCIALS.map((s) => (
-                                <a
-                                    key={s.label}
-                                    href={s.href}
-                                    target={s.newTab ? '_blank' : undefined}
-                                    rel={s.newTab ? 'noopener noreferrer' : undefined}
-                                    className="contact__social-card"
-                                    id={`social-${s.label.toLowerCase()}`}
-                                >
-                                    <span className="contact__social-icon">{s.icon}</span>
-                                    <div>
-                                        <span className="contact__social-label">{s.label}</span>
-                                        <span className="contact__social-sub">{s.sub}</span>
-                                    </div>
-                                    <span className="contact__social-arrow">→</span>
+                    <ul className="contact__links">
+                        {LINKS.map((link) => (
+                            <li key={link.label}>
+                                <a href={link.href} target="_blank" rel="noopener noreferrer" className="contact__link">
+                                    <link.icon aria-hidden="true" className="contact__link-icon" />
+                                    <span className="contact__link-text">
+                                        <span className="contact__link-label">{link.label}</span>
+                                        <span className="contact__link-handle">{link.handle}</span>
+                                    </span>
+                                    <FiArrowUpRight aria-hidden="true" className="contact__link-arrow" />
                                 </a>
-                            ))}
-                        </div>
-                    </motion.div>
-
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>
